@@ -1,0 +1,79 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+void inicializador_de_vetor(char *texto){ // função para iniciar todos elementos do vetor char com espaços vazios
+	int aux = 0;
+	while(aux < 20){ // looping para percorrer todo o vetor char
+		*texto = '\0'; // \0 significa espaço vazio
+		texto++; // passa para o próximo elemento do vetor
+		aux++; // incrementa o auxilar
+	}
+}
+int contador_de_vetor(char *texto){ // função para retornar o numero de elementos dentro do vetor
+	int aux = 0;
+	while(*texto != '\0'){ //para tamstr armazenar a quantidade de caracteres da string digitada pelo usuario
+				texto++; // passa para o próximo elemento do vetor
+				aux++;}
+    return aux;
+}
+int main(int argc, char** argv)
+{
+	int i,contador_int = 0,contador_op = 0,aux = 0,aux2 = 0,tamvet;
+	char x[25],operadores[4],inteiro[6];
+	inicializador_de_vetor(x),inicializador_de_vetor(operadores),inicializador_de_vetor(inteiro);
+	//o usuario digita os digitos para sair na tela
+	printf("Digite na tela a equacao para que fique de maneira posfixia\n");
+	gets(x);
+	tamvet = contador_de_vetor(x);
+	for(i = 0;i<tamvet;i++){//separação de inteiros e operadores
+		if(isdigit(x[i])){//caso seja detectado a forma de digito
+			contador_int++;
+			if(contador_int < 4){
+				inteiro[aux] = x[i];
+				aux++;
+				inteiro[aux] = ' ';
+				aux++;}
+			else;
+		}
+		else{
+			contador_op++;//caso seja detectado a forma de operador
+			if(contador_op < 3){
+				operadores[aux2] = x[i];
+				aux2++;
+				operadores[aux2] = ' ';
+				aux2++;}
+			else;
+		}
+		
+	}
+	if(contador_int >= 4){//tratamentos de erros
+		printf("Esse programa tem operandos demais para ser executado\n");
+		return 1;
+	}
+	else if(contador_op >= 3){
+		printf("Esse programa tem operadores demais para ser executado\n");
+		return 2;
+	}
+	else if(contador_int <= 2){
+		printf("Esse programa tem poucos operandos para ser executado \n");
+		return 3;
+	} 
+	else if(contador_op <= 1){
+		printf("Esse programa tem poucos operadores para ser executado\n");
+		return 4;
+	}
+	//inicio das formas pósfixas
+	x[4] = operadores[2];//1 forma
+	x[3] = inteiro[4];
+	printf("\n%s 1 forma posfixa\n",x);
+	
+	x[1] = x[2];//2 forma
+	x[2] = operadores[0];
+	printf("%s 2 forma posfixa\n",x);
+	
+	x[3] = x[2];//3 forma
+	x[2] = inteiro[4];
+	printf("%s 3 forma posfixa\n",x);
+	
+	return 0;
+}
