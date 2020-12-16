@@ -1,0 +1,102 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+void inicializador_de_vetor(char *texto){ // função para iniciar todos elementos do vetor char com espaços vazios
+	int aux = 0;
+	while(aux < 100){ // looping para percorrer todo o vetor char
+		*texto = '\0'; // \0 significa espaço vazio
+		texto++; // passa para o próximo elemento do vetor
+		aux++; // incrementa o auxilar
+	}
+}
+int contador_de_vetor(char *texto){ // função para retornar o numero de elementos dentro do vetor
+	int aux = -1;
+	while(*texto != '\0'){ //para tamstr armazenar a quantidade de caracteres da string digitada pelo usuario
+				texto++; // passa para o próximo elemento do vetor
+				aux++;}
+    return aux;
+}
+int main(){
+	int tamvet,i,id,variaissae,variaoperan,auxat,erro1,erro2,erro3,checkop,checknum; //erro 1 é quando dois ou mais operandos e/ou operadores são encontrados a esquerda da atribuição
+	char operacao[100];															   		   		    //erro 2 é quando temos dois operadores sem nada entre eles																	   //erro 3 é quando temos dois operandos sem nada entre eles
+		variaissae = 0,variaoperan = 0;															    //erro 3 é quando temos dois operandos sem nada entre eles
+		inicializador_de_vetor(operacao); //inicializar o vetor
+			printf("Digite a operacao que quiser\n");
+			fflush(stdin);
+			gets(operacao);
+			tamvet = contador_de_vetor(operacao); //armazenar o quanto do vetor foi utilizado
+			printf("essa e a tabela de identificadores: \n");
+			id = 1,auxat = 0,erro1 = 0,erro2 = 0,erro3 = 0,checkop = 0,checknum = 0;
+			for(i = 0;i<=tamvet;i++){ //casos de quando sera identificado os operadores e operandos
+				if(operacao[i] =='*'){
+					variaissae++;
+					checkop++;
+					checknum = 0;
+					if(variaissae == 3);
+					else{
+					printf("*         Operador aritmetico MULT\n");}}
+				else if(operacao[i] == '/'){
+					variaissae++;
+					checkop++;
+					checknum = 0;
+					if(variaissae == 3);
+					else{
+					printf("/         Operador aritmetico DIV\n");}}
+				else if(operacao[i] == ';'){
+					printf(";          Delimitador\n");}
+				else if(operacao[i] == ' '){}
+				else if(operacao[i] == '+'){
+					variaissae++;
+					checkop++;
+					checknum = 0;
+					if(variaissae == 3);
+					else{
+					printf("+         Operador aritmetico ADD\n");}}
+				else if(operacao[i] == '-'){
+					variaissae++;
+					checkop++;
+					checknum = 0;
+					if(variaissae == 3);
+					else{
+					printf("-         Operador aritmetico SUB\n");}}
+				else if(isdigit(operacao[i])){
+					printf("%c",operacao[i]);
+					while(isdigit(operacao[i+1])){
+						i++;
+						printf("%c",operacao[i]);
+					}
+					variaoperan++;
+					checkop = 0;
+					checknum++;
+					printf("         Numero\n");	//operandos
+				}
+				else if(operacao[i] == '='){
+					if((variaoperan>=2)&&(auxat==0))
+						erro1 = 1;
+					auxat = 1;
+					checkop = 0;
+					checknum = 0;
+					printf("=         Operador de atribuicao\n");} //atribuição
+				else{
+					variaoperan++;
+					checkop = 0;
+					checknum++;
+					if(variaoperan == 4);
+					else{
+					printf("%c         Identificador%i\n",operacao[i],id); //operandos
+					id++;}
+				}
+				if(checkop > 1)
+					erro2 = 1;
+				if(checknum > 1)
+					erro3 = 1;
+			}
+			if( (erro1 == 1) )
+				printf("\n\nforam encontrados mais de um operandos e operadores a esquerda do enunciado de atribuicao.");
+			if( (erro2 == 1) )
+				printf("\n\nforam encontrados dois operadores seguidos e separados por um espaco em branco.");
+			if( (erro3 == 1) )
+				printf("\n\nforam encontrados dois operandos seguidos e separados por um espaco em branco.");
+			printf("\n\n");
+	return 0;
+}
