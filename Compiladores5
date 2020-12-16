@@ -1,0 +1,76 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+void inicializador_de_vetor(char *texto){ // função para iniciar todos elementos do vetor char com espaços vazios
+	int aux = 0;
+	while(aux < 100){ // looping para percorrer todo o vetor char
+		*texto = '\0'; // \0 significa espaço vazio
+		texto++; // passa para o próximo elemento do vetor
+		aux++; // incrementa o auxilar
+	}
+}
+int contador_de_vetor(char *texto){ // função para retornar o numero de elementos dentro do vetor
+	int aux = -1;
+	while(*texto != '\0'){ //para tamstr armazenar a quantidade de caracteres da string digitada pelo usuario
+				texto++; // passa para o próximo elemento do vetor
+				aux++;}
+    return aux;
+}
+int main(){
+	int tamvet,i,id,variaissae,variaoperan; 
+	char operacao[100];															   		   		    																	   
+		variaissae = 0,variaoperan = 0;															    
+		inicializador_de_vetor(operacao); //inicializar o vetor
+			printf("Digite a operacao que quiser\n");
+			fflush(stdin);
+			gets(operacao);
+			tamvet = contador_de_vetor(operacao); //armazenar o quanto do vetor foi utilizado
+			printf("essa e a tabela de identificadores: \n");
+			id = 1;
+			for(i = 0;i<=tamvet;i++){ //casos de quando sera identificado os operadores e operandos
+				if(operacao[i] =='*'){
+					variaissae++;
+					if(variaissae >= 3);
+					else{
+					printf("*         Operador aritmetico MULT\n");}}
+				else if(operacao[i] == '/'){
+					variaissae++;
+					if(variaissae >= 3);
+					else{
+					printf("/         Operador aritmetico DIV\n");}}
+				else if(operacao[i] == ';'){
+					printf(";          Delimitador\n");}
+				else if(operacao[i] == ' '){}
+				else if(operacao[i] == '+'){
+					variaissae++;
+					if(variaissae >= 3);
+					else{
+					printf("+         Operador aritmetico ADD\n");}}
+				else if(operacao[i] == '-'){
+					variaissae++;
+					if(variaissae >= 3);
+					else{
+					printf("-         Operador aritmetico SUB\n");}}
+				else if(isdigit(operacao[i])){
+					printf("%c",operacao[i]);
+					while(isdigit(operacao[i+1])){
+						i++;
+						printf("%c",operacao[i]);
+					}
+					variaoperan++;
+					printf("         Numero\n");	//operandos
+				}
+				else if(operacao[i] == '='){
+					printf("=         Operador de atribuicao\n");} //atribuição
+				else{
+					variaoperan++;
+					if(variaoperan >= 4);
+					else{
+					printf("%c         Identificador%i\n",operacao[i],id); //operandos
+					id++;}
+				}
+
+			}
+
+	return 0;
+}
